@@ -23,4 +23,29 @@
 1. Įsirašom Doctrine variklį: `composer require symfony/orm-pack`.
 2. Įsirašom klasių generatorių: `composer require --dev symfony/maker-bundle`
 3. Pasiredaguojame `.env` faile parametrą DATABASE_URL, kad jis atitiktų mūsų turimą vartotojo vardą ir slaptažodį.
-4. Susikūriame naują lentelę/duomenų bazės objektą/entity naudodami `php bin/console make:entity`.
+4. Susikuriame duomenų bazę su `php bin/console doctrine:database:create`.
+5. Susikūriame naują lentelę/duomenų bazės objektą/entity naudodami `php bin/console make:entity`.
+6. Sukuriame nauja duomenų bazės lentelę su `php bin/console doctrine:schema:update --force`.
+
+# Darbas su formomis
+
+1. Norėdami išgauti visą informaciją apie užklausą iš Symfony, naudojame Request klasės `createFromGlobals` metodą. `$request = Request::createFromGlobals()`.
+2. `$request->request->all()` - grąžina visus POST duomenis.
+3. `$request->request->get('inputo-pavadinimas') - grąžina vieno input'o POST duomenis.
+4. `$request->isMethod('POST')` patikrina ar buvo atliktas POST requestas.
+
+# Darbas su Doctrine
+
+1. Norėdami naudoti Doctrine manageri, turime pas save į controllerio funkciją įsidėti `ManagerRegistry` klasę.
+2. Doctrine manageris - naudojamas įrašyti objektus į duombazę.
+3. Doctrine repozitorija - naudojama nuskaityti objektus iš duombazės.
+
+## Darbas su Manageriu
+
+4. $manager->persist() - išsaugo objektą į query sąrašą.
+5. $manager->flush() - įrašo visus persist'intus objektus į duombazę.
+
+## Darbas su Repozitorija
+
+6. Norėdami nuskaityti repozitorijos visus duomenis naudojame `findAll()`. SELECT \* FROM contact.
+7. Norėdami nuskaityti repozitorijos vieną įrašą naudojame `findOneBy(['name' => 'Petras']);`. SELECT \* FROM contact WHERE name='Petras'.

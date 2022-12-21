@@ -1,0 +1,13 @@
+0. Pasidaryti, kad meniu butu aktyvus.
+1. Formos sukūrimas:
+* Sukurti formos html'ą.
+* Apdoroti formos duomenis su Symfony.
+* Išsaugoti užpildytos formos duomenis į duomenų bazę.
+* Padaryti validacija vartotojo duomenims.
+* Sukurti atskirą puslapį `/admin`, kuriame galėtume tuos formos duomenis peržiūrėti.
+
+2. Sukurti komponentą, kuris iš duomenų bazės pasiima sąrašą įrašų ir juos atvaizduoja puslapyje.
+* Blogo įrašai.
+* Atsiliepimai.
+* Elektroninės prekių sąrašas.
+

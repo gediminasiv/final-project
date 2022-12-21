@@ -1,5 +1,43 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}Kontaktai{% endblock %}
+
 {% block content %}
 <h1>Contacts</h1>
+
+<div class="row">
+    <div class="col">
+        <form action="{{ path('contact') }}" method="post">
+            <div class="form-group">
+                <label>Name</label>
+                <input class="form-control" name="client-name" />
+            </div>
+
+            <div class="form-group">
+                <label>Email</label>
+                <input class="form-control" name="client-email" />
+            </div>
+
+            <div class="form-group">
+                <label>Message</label>
+                <textarea class="form-control" name="client-message"></textarea>
+            </div>
+
+            {% if error is defined %}
+                <div class="alert alert-danger" role="alert">
+                    {{ error }}
+                </div>
+            {% endif %}
+
+            {% if success is defined %}
+                <div class="alert alert-success">
+                    Jūsų užklausa sėkminga. Mūsų konsultantas su jumis susisieks visai ne už ilgo.
+                </div>
+            {% endif %}
+
+            <input type="submit" class="btn btn-primary" value="Submit" />
+        </form>
+    </div>
+    <div class="col"></div>
+</div>
 {% endblock %}
