@@ -23,6 +23,8 @@ class IndexController extends AbstractController
         $clientName = $request->request->get('client-name');
         $clientEmail = $request->request->get('client-email');
         $message = $request->request->get('client-message');
+        $category = $request->request->get('category');
+
 
         if ($request->isMethod('POST')) {
             $error = null;
@@ -45,6 +47,7 @@ class IndexController extends AbstractController
             $contact->setEmail($clientEmail);
             $contact->setName($clientName);
             $contact->setMessage($message);
+            $contact->setCategory($category);
 
             $manager = $doctrine->getManager();
 
