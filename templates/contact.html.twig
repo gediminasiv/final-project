@@ -19,9 +19,26 @@
             </div>
 
             <div class="form-group">
+                <label>Category</label>
+
+                <select class="form-control" name="category">
+                    <option value="help-request">Help request</option>
+                    <option value="review-request">Review request</option>
+                    <option value="other-request">Other request</option>
+                </select>
+            </div>
+
+            <div class="form-group">
                 <label>Message</label>
                 <textarea class="form-control" name="client-message"></textarea>
             </div>
+
+            {% if error is defined or app.flashes('success')[0] is defined %}
+                <script>
+                    alert('zinute sekminga, cia dedam javascript scrollinimui iki tos vietos, kurios tau reikia')
+                    window.scrollTo(0, 99999)
+                </script>
+            {% endif %}
 
             {% if error is defined %}
                 <div class="alert alert-danger" role="alert">
@@ -29,10 +46,11 @@
                 </div>
             {% endif %}
 
-            {% if success is defined %}
+            {% if app.flashes('success')[0] is defined %}
                 <div class="alert alert-success">
                     Jūsų užklausa sėkminga. Mūsų konsultantas su jumis susisieks visai ne už ilgo.
                 </div>
+
             {% endif %}
 
             <input type="submit" class="btn btn-primary" value="Submit" />
