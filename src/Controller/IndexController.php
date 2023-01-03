@@ -55,9 +55,9 @@ class IndexController extends AbstractController
 
             $manager->flush(); // mes įvykdom visus querius.
 
-            return $this->render('contact.html.twig', [
-                'success' => true
-            ]);
+            $this->addFlash('success', true);
+
+            return $this->redirectToRoute('contact');
         }
 
         return $this->render('contact.html.twig');
@@ -85,5 +85,24 @@ class IndexController extends AbstractController
         return $this->render('single-contact.html.twig', [
             'contact' => $contact
         ]);
+    }
+
+
+    #[Route('/create-blog-post', name: 'create_blog')]
+    function createBlog(ManagerRegistry $doctrine)
+    {
+        $blog = new Blog();
+
+        $blog->setTitle('New title');
+        $blog->setSlug('some-slug');
+        $blog->setContent('Some content');
+        $blog->setDate(date('Y-M-D'));
+
+        $manager = $doctrine->getManager();
+
+        $manager->persist($blog);
+        $manager->flush();
+
+        return new Response(true);
     }
 }

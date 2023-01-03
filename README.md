@@ -27,6 +27,13 @@
 5. Susikūriame naują lentelę/duomenų bazės objektą/entity naudodami `php bin/console make:entity`.
 6. Sukuriame nauja duomenų bazės lentelę su `php bin/console doctrine:schema:update --force`.
 
+# Naujos lentelės kūrimas
+
+1. `php bin/console make:entity`
+2. Suvedam laukelius naujai duombazei. Jeigu neaišku koks tipas, įvedame `?`.
+3. `php bin/console doctrine:schema:update --force`.
+
+
 # Darbas su formomis
 
 1. Norėdami išgauti visą informaciją apie užklausą iš Symfony, naudojame Request klasės `createFromGlobals` metodą. `$request = Request::createFromGlobals()`.
@@ -49,3 +56,25 @@
 
 6. Norėdami nuskaityti repozitorijos visus duomenis naudojame `findAll()`. SELECT \* FROM contact.
 7. Norėdami nuskaityti repozitorijos vieną įrašą naudojame `findOneBy(['name' => 'Petras']);`. SELECT \* FROM contact WHERE name='Petras'.
+
+## Cache valymas
+
+1. Chrome - Ctrl + Shift + R.
+2. Symfony php failų pravalymas - php bin/console cache:clear 
+
+## Naujas įrašas duombazėje
+
+1. Susikuriam Entity klasę (nepamirštam jos pridėti su `use`) controlleryje - new Blog();
+2. Naudodami setter'ius sudedame reikalingus duomenis (dažniausiai iš formos).
+3. Susikuriame Doctrine manageri su $manager->getManager().
+4. Naudodami $manager funkcijas persist ir flush išsaugome įrašą.
+
+P.S. Jei norime pridėti daugiau laukų, galime iššaukti `make:entity` ant jau esamo entičio, pvz.: `php bin/console make:entity Review`.
+
+## Flash žinutės (kaip nustatyti kintamąjį po redirecto)
+
+1. Norėdami nustatyti kintamąjį, kurį norėsime panaudoti vieną kartą (tarkim success message) prieš redirectant žmogų turime nustatyti jam flash žinutę.
+2. Flash žinutė nustatoma su `$this->addFlash('zinutes_pavadinimas', 'zinutes reiksme')`.
+3. Norint išgauti Flash žinutę Twig šablone naudojame `{{ app.flashes('zinutes_pavadinimas') }}` funkciją.
+4. Kadangi `app.flashes` funkcijos return'as visad yra arba tuščias masyvas arba mūsų žinutė, norėdami
+patikrinti ar žinutė atėjo visada turime patikrinti pirmąjį app.flashes masyvo elementą su `app.flashes('zinutes_pavadinimas')[0] is defined`.
